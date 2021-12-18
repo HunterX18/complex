@@ -16,7 +16,7 @@ after_success:
   - docker build -t dockerx2000/complex-nginx ./nginx
   - docker build -t dockerx2000/complex-server ./server
   - docker build -t dockerx2000/complex-worker ./worker
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER-ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   - docker push dockerx2000/complex-client
   - docker push dockerx2000/complex-nginx
   - docker push dockerx2000/complex-server
