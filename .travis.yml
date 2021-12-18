@@ -1,0 +1,23 @@
+language: generic
+
+sudo: required
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dockerx2000/react-test -f ./client/Dockerile.dev ./client
+
+script:
+  - docker run -e CI=true dockerx2000/react-test npm test
+
+after_success:
+  - docker build -t dockerx2000/complex-client ./client
+  - docker build -t dockerx2000/complex-nginx ./nginx
+  - docker build -t dockerx2000/complex-server ./server
+  - docker build -t dockerx2000/complex-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER-ID" --password-stdin
+  - docker push dockerx2000/complex-client
+  - docker push dockerx2000/complex-nginx
+  - docker push dockerx2000/complex-server
+  - docker push dockerx2000/complex-worker
