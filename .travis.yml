@@ -6,7 +6,7 @@ services:
   - docker
 
 before_install:
-  - docker build -t dockerx2000/react-test -f ./client/Dockerile.dev ./client
+  - docker build -t dockerx2000/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true dockerx2000/react-test npm test
